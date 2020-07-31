@@ -1,0 +1,29 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    # find all the files in ./infra
+    manifests:
+      - ./k8s/*
+build:
+  local:
+    # dont push to docker hub (which is the default)
+    push: false
+  artifacts:
+    - image: chenmargalit/react-test
+      # the folder that contains all the content
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: chenmargalit/react-test-server
+      context: server
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '*.js'
+            dest: .

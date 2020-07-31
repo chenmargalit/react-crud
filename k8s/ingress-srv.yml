@@ -1,0 +1,44 @@
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ingress-service
+#   annotations:
+#     # create an ingress controller based on the nginx project
+#     kubernetes.io/ingress.class: nginx
+#     # after forwarding request to server, edit the url and remove everything after the /
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   rules:
+#     - http:
+#         paths:
+#           - path: /api/?(.*)
+#             backend:
+#               serviceName: server-srv
+#               servicePort: 5000
+#           # if the path is /
+#           # send this to whats governed by the client-node-ports CusterIP file, which in my case is the client
+#           # - path: /?(.*)
+#           - path: /
+#             backend:
+#               serviceName: client-srv
+#               servicePort: 3000
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/?(.*)
+            backend:
+              serviceName: server-srv
+              servicePort: 5000
+          - path: /?(.*)
+            backend:
+              serviceName: client-srv
+              servicePort: 3000

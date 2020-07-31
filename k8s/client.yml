@@ -1,0 +1,67 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: client-pod
+#   labels:
+#     component: web
+# spec:
+#   containers:
+#     - name: client
+#       image: chenmargalit/react-test
+#       ports:
+#         - containerPort: 3000
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: client-node-ports
+# spec:
+#   type: NodePort
+#   ports:
+#     - port: 3050
+#       targetPort: 3000
+#       nodePort: 31500
+#   selector:
+#     component: web
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-pod
+  # how many pods for this auth service
+spec:
+  replicas: 1
+  # selector will help the deployment find the pods its going to create
+  selector:
+    matchLabels:
+      app: client
+      # how to create each individual pod that this template is going to create
+  template:
+    metadata:
+      # this has to match up with the matchLabels above (probably around line 10)
+      labels:
+        app: client
+        # tell the pod how to behave
+    spec:
+      containers:
+        # name is only important for logging purposes
+        - name: client-pod
+          # the image we build with docker
+          image: chenmargalit/react-test
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+  # tell the service how to behave
+spec:
+  # tell the service how to find the pods to give access to
+  selector:
+    # every pod with label of app: auth
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
