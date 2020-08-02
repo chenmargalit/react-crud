@@ -24,7 +24,7 @@ router.delete('/:id', async (req, res) => {
     res.status(200).send('success');
   } catch (e) {
     console.log('error deleting specific employee', e);
-    res.status(400).send('error while deleting specific employee', e);
+    next(ApiError.badRequest('Could not truncate table, please try again shortly'));
   }
 });
 

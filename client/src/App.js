@@ -14,9 +14,6 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Route path='/signup' component={Signup} />
-        <Route path='/login' component={Login} />
-        <Route path='/home' component={Home} /> */}
         <Route path='/' exact component={Dashboard} />
       </div>
     </Router>

@@ -2,13 +2,12 @@ import React from 'react';
 import { Table, Popconfirm } from 'antd';
 import { deleteEmployee } from '../utils/http-requests';
 
-const showTable = ({ employees, setEmployeeRemoved, parentEdit }) => {
+const showTable = ({ employees, setEmployeeRemoved }) => {
   const columns = [
     {
       title: 'Name',
       dataIndex: 'name',
       align: 'center',
-      editable: true,
     },
     {
       title: 'Department',
@@ -41,30 +40,11 @@ const showTable = ({ employees, setEmployeeRemoved, parentEdit }) => {
       ),
       align: 'center',
     },
-    {
-      title: 'Edit',
-      dataIndex: 'edit',
-      render: (text, record) => (
-        <button
-          onClick={() => editDetails(record)}
-          style={{ border: 'none', background: 'white', color: '#0099cc' }}
-        >
-          Edit
-        </button>
-      ),
-      align: 'center',
-    },
   ];
 
-  const editDetails = (record) => {
-    parentEdit(record);
-  };
-
   const handleDelete = async (id) => {
-    const result = await deleteEmployee(id);
-    // if (result === 'success') {
+    await deleteEmployee(id);
     setEmployeeRemoved((prevEmployeeRemoved) => prevEmployeeRemoved - 1);
-    // }
   };
   return (
     <Table

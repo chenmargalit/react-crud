@@ -30,25 +30,9 @@ const db = mysql2.createPool(
 //   }
 // });
 
-const createdb = () => {
-  console.log('creating db');
-  let sql = `CREATE DATABASE`;
-  sql.db.query(sql, (err, result) => {
-    err
-      ? console.log('error while trying to create db', err)
-      : console.log(`db created successfully`, result);
-  });
-};
-
-const describeDb = () => {
-  let sql = 'describe database';
-  db.query(sql, (err, result) => {
-    err ? console.log(err) : console.log('res is', result);
-  });
-};
+// a few convenience sql functions
 
 const createTable = (table) => {
-  //! ADD ID in case theres more than one person with this name
   console.log('creating table');
   let sql = `CREATE TABLE ${table}(id int AUTO_INCREMENT, name varchar(80) NOT NULL, department varchar(55) NOT NULL, startDate DATE NOT NULL, israeli_ID varchar(10) UNIQUE, PRIMARY KEY(id))`;
   db.query(sql, (err, result) => {
@@ -71,13 +55,5 @@ const clearTable = (table) => {
     err ? console.log('clearing table issue') : console.log('clearing table succeeded');
   });
 };
-// creates table named Vasts
-// createTable('users');
-
-// drop table named Vasts
-// drop('users');
-
-// delete all from table named Vasts
-// clearTable('Vasts');
 
 module.exports = { db, createTable, drop };
