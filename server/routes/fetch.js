@@ -9,8 +9,9 @@ router.get('/', async (req, res, next) => {
     const sql = 'select * from Employees';
     const result = await db.query(sql);
     res.send(result[0]);
-  } catch {
-    next(ApiError.badRequest('Could not fetch data, please try again shortly'));
+  } catch (e) {
+    console.log('e is', e);
+    // next(ApiError.badRequest('Could not fetch data, please try again shortly'));
   }
 });
 

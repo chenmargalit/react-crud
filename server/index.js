@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { createTable, drop } = require('./sql/mySQL');
+const { createTable, drop, db } = require('./sql/mySQL');
 
 const apiErrorHandler = require('./errors/api-error-handler');
 
@@ -19,21 +19,6 @@ app.use('/api/fetch', fetch);
 app.use('/api/truncate', truncate);
 
 app.use(apiErrorHandler);
-
-app.get('/api/wopa', (req, res) => {
-  console.log('reached wopa on server');
-  res.status(200).send('regular wopa');
-});
-
-app.get('/api/wopa2', (req, res) => {
-  console.log('reached wopa2 on server');
-  res.status(200).send('wopa2');
-});
-
-app.get('/api', (req, res) => {
-  console.log('reached root /');
-  res.send('this is the root');
-});
 
 app.listen(5000, () => {
   console.log('listening on 5000');

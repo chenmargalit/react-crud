@@ -5,21 +5,21 @@ require('dotenv').config();
 const db = mysql2.createPool(
   {
     connectionLimit: 5,
-    host: 'remotemysql.com',
-    user: 'QHumDJGXfj',
-    password: 'NQMKK0TM1U',
-    database: 'QHumDJGXfj',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     dateStrings: true,
   },
   () => console.log('mysql on')
 );
 
 // a bit faster, but less secure
-// module.exports = db = mysql.createConnection({
+// module.exports = db = mysql2.createConnection({
 //   host: 'remotemysql.com',
 //   user: 'QHumDJGXfj',
 //   password: 'NQMKK0TM1U',
-//   database: 'QHumDJGXfj'
+//   database: 'QHumDJGXfj',
 // });
 // // createdb();
 // db.connect(err => {

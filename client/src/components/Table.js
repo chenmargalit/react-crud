@@ -22,7 +22,6 @@ const showTable = ({ employees, setEmployeeRemoved }) => {
     {
       title: 'StartDate',
       dataIndex: 'startDate',
-      align: 'left',
       align: 'center',
     },
     {
