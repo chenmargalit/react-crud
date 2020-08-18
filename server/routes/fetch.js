@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
     res.send(result[0]);
   } catch (e) {
     console.log('e is', e);
-    // next(ApiError.badRequest('Could not fetch data, please try again shortly'));
+    next(ApiError.badRequest('Could not fetch data, please try again shortly'));
   }
 });
 

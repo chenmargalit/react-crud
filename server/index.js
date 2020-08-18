@@ -3,9 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// use to create/drop the entire table
-// const { createTable, drop, db } = require('./sql/mySQL');
-
 const apiErrorHandler = require('./errors/api-error-handler');
 
 const create = require('./routes/create');

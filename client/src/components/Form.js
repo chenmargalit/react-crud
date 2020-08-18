@@ -20,8 +20,8 @@ const EmployeesForm = ({ setEmployeeAdded }) => {
     setEmployeeAdded((employeeAdded) => employeeAdded + 1);
   };
 
+  // delete everything in table
   const deleteAll = async () => {
-    // delete everything in table
     const deleteResults = await deleteAllFromEmployeesTable();
     if (deleteResults === 'success') {
       setEmployeeAdded((employeeAdded) => employeeAdded + 1);

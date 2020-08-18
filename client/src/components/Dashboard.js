@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
-
 import ShowTable from './Table';
 import EmployeesForm from './Form';
 
@@ -21,8 +20,8 @@ const Dashboard = () => {
     getEmployees();
   }, [employeeAdded, employeeRemoved]);
 
+  // toggle form
   const toggleEmployeeAddForm = () => {
-    // toggle form
     presentForm ? setPresentForm(false) : setPresentForm(true);
   };
 
